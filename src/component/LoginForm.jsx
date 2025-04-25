@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { SignInPage } from '@toolpad/core/SignInPage';
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { useTheme } from '@mui/material/styles';
-import { getUserByEmail } from '../data/users';
+import { getUserByEmail, getUserByPassword } from '../data/users';
 
 const providers = [{ id: 'credentials', name: 'Email and Password' }];
 
@@ -18,8 +18,9 @@ export default function LoginForm() {
           const email = formData.get('email');
           const password = formData.get('password');
           const user = getUserByEmail(email);
+          const pass = getUserByPassword(password)
 
-          if (user && user.password === password) {
+          if (user && pass) {
             navigate('/hello');
           } else {
             alert('Invalid credentials');
